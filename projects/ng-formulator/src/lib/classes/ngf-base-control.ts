@@ -8,15 +8,22 @@ export class NgfBaseControl extends FormControl {
     public size: number;
     public validatorStrings: NgfValidatorTypeString[];
 
-    constructor(initalValue: any, config: NgfBaseControlConfig, validators: NgfValidator[]) {
-
-        const ngValidators = validators.map(v => v.validatorFunction);
-        const typeList = validators.map(v => v.type);
+    constructor(initalValue: any, config: NgfBaseControlConfig, validators?: NgfValidator[]) {
+        let ngValidators;
+        let typeList;
+        if (validators) {
+            ngValidators = validators.map(v => v.validatorFunction);
+            typeList = validators.map(v => v.type);
+        }
 
         super(initalValue, ngValidators);
 
         this.label = config.label;
         this.size = config.size || 12;
-        this.validatorStrings = typeList;
+        this.validatorStrings = typeList || null;
+    }
+
+    public hasValidator(validatorString: NgfValidatorTypeString): boolean {
+        return this.validatorStrings.indexOf(validatorString) > -1;
     }
 }

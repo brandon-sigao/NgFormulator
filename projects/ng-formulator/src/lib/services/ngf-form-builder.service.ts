@@ -1,12 +1,16 @@
+import { NgfTextAreaControl } from './../classes/ngf-textarea-control';
 import { FormGroup, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import * as _ from 'lodash';
 import { NgfGroupConfig } from '../interfaces/group-interfaces/ngf-group-config';
 import { NgfBaseControlConfig } from '../interfaces/control-interfaces/ngf-base-control-config';
-import { NgfTextControl, NgfFormGroup } from '../classes';
+import { NgfTextControl, NgfFormGroup, NgfRadioControl } from '../classes';
 import { NgfControlType, NgfValidatorTypeString } from '../types';
-import { NgfTextControlConfig, NgfValidatorsConfig } from '../interfaces';
+import { NgfTextControlConfig, NgfValidatorsConfig, NgfTextAreaControlConfig } from '../interfaces';
 import { NgfValidator } from '../classes/ngf-validator';
+import { NgfRadioControlConfig } from '../interfaces/control-interfaces/ngf-radio-control-config';
+import { NgfFormBuilderReporterService } from './ngf-form-builder-reporter.service';
+import { checkObject } from '../util/check-object.util';
 
 @Injectable()
 export class NgfFormBuilderService {
@@ -22,10 +26,15 @@ export class NgfFormBuilderService {
     }
 
     private buildControl(controlConfig: NgfBaseControlConfig): NgfControlType {
-        if (controlConfig.type === 'text') {
-            const config = controlConfig as NgfTextControlConfig;
-            const validators: NgfValidator[] = this.buildValidators(config.validators || {});
-            return new NgfTextControl(config, validators);
+        const validators: NgfValidator[] = this.buildValidators(controlConfig.validators || {});
+        switch (controlConfig.type) {
+            case 'text':
+                return new NgfTextControl(controlConfig as NgfTextControlConfig, validators);
+            case 'textarea':
+                return new NgfTextAreaControl(controlConfig as NgfTextAreaControlConfig, validators);
+            case 'radio':
+                checkObject(controlConfig, 'options', `Config option for radio control has no options`);
+                return new NgfRadioControl(controlConfig as NgfRadioControlConfig, validators);
         }
     }
     private buildControls(controls: { [key: string]: NgfBaseControlConfig }): { [key: string]: AbstractControl } {

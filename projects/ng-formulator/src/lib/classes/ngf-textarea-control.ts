@@ -1,15 +1,9 @@
-import { NgfValidatorTypeString } from './../types/ngf-validator-type-string';
+import { NgfBaseControl } from './ngf-base-control';
 import { FormControl } from '@angular/forms';
 import { NgfTextAreaControlConfig } from '../interfaces';
-export class NgfTextAreaControl extends FormControl {
-
-    public label: string;
-    public size: number;
-    public validatorStrings: NgfValidatorTypeString[];
-    constructor(config: NgfTextAreaControlConfig, validators) {
-        super(config.initialValue || '', validators);
-        this.label = config.label;
-        this.size = config.size;
-        this.validatorStrings = config.validatorStrings;
+import { NgfValidator } from './ngf-validator';
+export class NgfTextAreaControl extends NgfBaseControl {
+    constructor(config: NgfTextAreaControlConfig, validators?: NgfValidator[]) {
+        super(config.initialValue || '', config, validators);
     }
 }
