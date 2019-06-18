@@ -1,16 +1,16 @@
 import { NgfTextAreaControl } from './../classes/ngf-textarea-control';
-import { FormGroup, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
-import { Injectable, Injector } from '@angular/core';
+import { FormGroup, AbstractControl, Validators } from '@angular/forms';
+import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { NgfGroupConfig } from '../interfaces/group-interfaces/ngf-group-config';
 import { NgfBaseControlConfig } from '../interfaces/control-interfaces/ngf-base-control-config';
-import { NgfTextControl, NgfFormGroup, NgfRadioControl } from '../classes';
+import { NgfTextControl, NgfFormGroup, NgfRadioControl, NgfMultiSelectControl } from '../classes';
 import { NgfControlType, NgfValidatorTypeString } from '../types';
 import { NgfTextControlConfig, NgfValidatorsConfig, NgfTextAreaControlConfig } from '../interfaces';
 import { NgfValidator } from '../classes/ngf-validator';
 import { NgfRadioControlConfig } from '../interfaces/control-interfaces/ngf-radio-control-config';
-import { NgfFormBuilderReporterService } from './ngf-form-builder-reporter.service';
 import { checkObject } from '../util/check-object.util';
+import { NgfMultiSelectControlConfig } from '../interfaces/control-interfaces/ngf-multi-select-control-config';
 
 @Injectable()
 export class NgfFormBuilderService {
@@ -35,6 +35,9 @@ export class NgfFormBuilderService {
             case 'radio':
                 checkObject(controlConfig, 'options', `Config option for radio control has no options`);
                 return new NgfRadioControl(controlConfig as NgfRadioControlConfig, validators);
+            case 'multi':
+                checkObject(controlConfig, 'options', `Config option for multi-select control has no options`);
+                return new NgfMultiSelectControl(controlConfig as NgfMultiSelectControlConfig);
         }
     }
     private buildControls(controls: { [key: string]: NgfBaseControlConfig }): { [key: string]: AbstractControl } {

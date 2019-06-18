@@ -1,9 +1,8 @@
-import { NgFormulatorModule } from '../ng-formulator.module';
-import { TestBed, inject } from '@angular/core/testing';
-import { NgfBaseControl } from '../classes/ngf-base-control';
-import { NgfFormBuilderService } from '../services/ngf-form-builder.service';
-import { NgfFormGroup, NgfRadioControl } from '../classes';
-import { NgfGroupConfig } from '../interfaces';
+import { NgFormulatorModule } from '../../projects/ng-formulator/src/lib/ng-formulator.module';
+import { TestBed } from '@angular/core/testing';
+import { NgfRadioControl } from '../../projects/ng-formulator/src/lib/classes';
+import { NgfGroupConfig } from '../../projects/ng-formulator/src/lib/interfaces';
+
 describe('RadioInput', () => {
     const optionSet = {
         1: 'Label 1',
@@ -52,8 +51,34 @@ describe('RadioInput', () => {
 
 
     });
-    it('should map options to strings no matter what', () => {
+    it('should map selected values to strings no matter what', () => {
+        const control = new NgfRadioControl({
+            initialValue: '',
+            label: 'test label',
+            type: 'radio',
+            options: {
+                1: 'Test Value 1'
+            },
+        });
+        expect(control.options).toEqual({
+            // tslint:disable-next-line:object-literal-key-quotes
+            '1': 'Test Value 1'
+        });
+
     });
     it('should output a label/value array', () => {
+        const control = new NgfRadioControl({
+            initialValue: '',
+            label: 'test label',
+            type: 'radio',
+            options: {
+                1: 'Test Label 1',
+                2: 'Test Label 2'
+            },
+        });
+        expect(control.getOptionsAsList()).toEqual([
+            { value: '1', label: 'Test Label 1' },
+            { value: '2', label: 'Test Label 2' }
+        ]);
     });
 });

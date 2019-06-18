@@ -1,11 +1,9 @@
 import { NgfBaseControl } from './ngf-base-control';
-import { FormControl } from '@angular/forms';
 import { NgfRadioControlConfig } from '../interfaces/control-interfaces/ngf-radio-control-config';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-
+import { NgfValidator } from './ngf-validator';
 export class NgfRadioControl extends NgfBaseControl {
-    private options: { [key: string]: string } | { [key: number]: string };
-    constructor(config: NgfRadioControlConfig, validators?) {
+    public options: { [key: string]: string } | { [key: number]: string };
+    constructor(config: NgfRadioControlConfig, validators?: NgfValidator[]) {
         super(config.initialValue || '', config, validators);
         this.options = config.options;
     }
@@ -18,5 +16,9 @@ export class NgfRadioControl extends NgfBaseControl {
         const match = Object.keys(this.options)
             .find(key => this.options[key] === label);
         return match || null;
+    }
+
+    public getOptionsAsList(): { value: string, label: string }[] {
+        return Object.keys(this.options).map(key => ({ value: key, label: this.options[key] }));
     }
 }

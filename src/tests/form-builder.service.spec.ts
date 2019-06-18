@@ -1,8 +1,8 @@
-import { NgFormulatorModule } from './../ng-formulator.module';
+import { NgFormulatorModule } from '../../projects/ng-formulator/src/lib/ng-formulator.module';
 import { TestBed } from '@angular/core/testing';
 import { inject } from '@angular/core/testing';
-import { NgfFormBuilderService } from './ngf-form-builder.service';
-import { NgfTextControl, NgfTextAreaControl, NgfRadioControl } from '../classes';
+import { NgfFormBuilderService } from '../../projects/ng-formulator/src/lib/services/ngf-form-builder.service';
+import { NgfTextControl, NgfTextAreaControl, NgfRadioControl, NgfMultiSelectControl } from '../../projects/ng-formulator/src/lib/classes';
 
 describe('NgfFormBuilderService', () => {
 
@@ -109,5 +109,25 @@ describe('NgfFormBuilderService', () => {
             });
             const control = group.get('testControl');
             expect(control instanceof NgfRadioControl).toEqual(true);
+        }));
+    it('should create a multi-select field',
+        inject([NgfFormBuilderService], (service: NgfFormBuilderService) => {
+
+            const group = service.group({
+                label: 'test',
+                controls: {
+                    testControl: {
+                        label: 'test control',
+                        type: 'multi',
+                        options: {
+                            1: 'test 1',
+                            2: 'test 2',
+                            3: 'test 3'
+                        }
+                    }
+                }
+            });
+            const control = group.get('testControl');
+            expect(control instanceof NgfMultiSelectControl).toEqual(true);
         }));
 });

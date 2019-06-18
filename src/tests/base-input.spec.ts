@@ -1,9 +1,8 @@
-import { NgFormulatorModule } from './../ng-formulator.module';
+import { NgFormulatorModule } from '../../projects/ng-formulator/src/lib/ng-formulator.module';
 import { TestBed, inject } from '@angular/core/testing';
-import { NgfBaseControl } from '../classes/ngf-base-control';
-import { NgfFormBuilderService } from '../services/ngf-form-builder.service';
-import { NgfFormGroup } from '../classes';
-import { NgfGroupConfig } from '../interfaces';
+import { NgfBaseControl } from '../../projects/ng-formulator/src/lib/classes/ngf-base-control';
+import { NgfFormBuilderService } from '../../projects/ng-formulator/src/lib/services/ngf-form-builder.service';
+import { NgfGroupConfig } from '../../projects/ng-formulator/src/lib/interfaces';
 describe('BaseInput', () => {
 
     const mockGroup: NgfGroupConfig = {
