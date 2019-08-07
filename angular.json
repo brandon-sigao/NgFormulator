@@ -139,7 +139,7 @@
       "root": "projects/ng-formulator",
       "sourceRoot": "projects/ng-formulator/src",
       "projectType": "library",
-      "prefix": "NgF",
+      "prefix": "Ngf",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

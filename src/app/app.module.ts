@@ -1,3 +1,4 @@
+import { NgFormulatorModule } from './../../projects/ng-formulator/src/lib/ng-formulator.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,7 +9,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgFormulatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

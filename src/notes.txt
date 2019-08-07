@@ -1,0 +1,28 @@
+
+// TODO (short term)
+-make date/time control 
+-make number control
+-make boolean control
+-add about a billion more tests
+-create form group component
+-create component for:
+    -text field
+    -text area field
+    -radio field
+    -multi-select field
+    -date/time field
+
+// TODO (medium term)
+-Increase customizations on components
+    -Possibly allow custom classes? configuration object?
+    -definitely want to keep the concept of focused/unfocused and let the user apply things in either case
+
+// TODO (Long term)
+-Add show/hide logic
+    -make sure validations don't fail when hidden
+
+// adding bootstrap
+https://stackoverflow.com/questions/54223504/angular-6-library-using-bootstrap
+
+// Dependancy info
+https://stackoverflow.com/questions/50189589/angular-cli-6-where-to-put-library-dependencies

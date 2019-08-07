@@ -1,11 +1,16 @@
+import { NgFormulatorModule } from './../../projects/ng-formulator/src/lib/ng-formulator.module';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        NgFormulatorModule
+      ],
       declarations: [
-        AppComponent
+        AppComponent,
+
       ],
     }).compileComponents();
   }));

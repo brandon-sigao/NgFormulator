@@ -1,5 +1,5 @@
 import { NgfControlTypeText } from '../../types';
-import { NgfBaseValidatorConfig, NgfValidatorsConfig } from '../validator-interfaces';
+import { NgfValidatorsConfig } from '../validator-interfaces';
 
 export interface NgfBaseControlConfig {
     label: string;

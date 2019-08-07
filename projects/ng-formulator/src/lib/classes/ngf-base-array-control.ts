@@ -1,7 +1,5 @@
 import { NgfBaseControlConfig } from '../interfaces/control-interfaces/ngf-base-control-config';
 import { FormArray, FormControl } from '@angular/forms';
-import { NgfValidatorTypeString } from '../types';
-import { NgfValidator } from './ngf-validator';
 
 export class NgfBaseArrayControl extends FormArray {
     public label: string;

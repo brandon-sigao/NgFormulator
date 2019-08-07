@@ -1,11 +1,11 @@
 import { NgfTextAreaControl } from './../classes/ngf-textarea-control';
-import { FormGroup, AbstractControl, Validators } from '@angular/forms';
+import { AbstractControl, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { NgfGroupConfig } from '../interfaces/group-interfaces/ngf-group-config';
 import { NgfBaseControlConfig } from '../interfaces/control-interfaces/ngf-base-control-config';
 import { NgfTextControl, NgfFormGroup, NgfRadioControl, NgfMultiSelectControl } from '../classes';
-import { NgfControlType, NgfValidatorTypeString } from '../types';
+import { NgfControlType } from '../types';
 import { NgfTextControlConfig, NgfValidatorsConfig, NgfTextAreaControlConfig } from '../interfaces';
 import { NgfValidator } from '../classes/ngf-validator';
 import { NgfRadioControlConfig } from '../interfaces/control-interfaces/ngf-radio-control-config';
@@ -25,6 +25,14 @@ export class NgfFormBuilderService {
         return new NgfFormGroup(controls);
     }
 
+    private addGroupsToControls(
+        groups: { [key: string]: NgfGroupConfig },
+        controls: { [key: string]: AbstractControl }): void {
+        Object.keys(groups).forEach(key => {
+            controls[key] = this.group(groups[key]);
+        });
+    }
+
     private buildControl(controlConfig: NgfBaseControlConfig): NgfControlType {
         const validators: NgfValidator[] = this.buildValidators(controlConfig.validators || {});
         switch (controlConfig.type) {
@@ -40,7 +48,7 @@ export class NgfFormBuilderService {
                 return new NgfMultiSelectControl(controlConfig as NgfMultiSelectControlConfig);
         }
     }
-    private buildControls(controls: { [key: string]: NgfBaseControlConfig }): { [key: string]: AbstractControl } {
+    private buildControls(controls: { [key: string]: NgfBaseControlConfig }): { [key: string]: NgfControlType } {
         const mappedControls = {};
         Object.keys(controls).forEach(key => {
             mappedControls[key] = this.buildControl(controls[key]);
@@ -48,13 +56,7 @@ export class NgfFormBuilderService {
 
         return mappedControls;
     }
-    private addGroupsToControls(
-        groups: { [key: string]: NgfGroupConfig },
-        controls: { [key: string]: AbstractControl }): void {
-        Object.keys(groups).forEach(key => {
-            controls[key] = this.group(groups[key]);
-        });
-    }
+
 
     private buildValidators(validatorGroup: NgfValidatorsConfig): NgfValidator[] {
         return Object.keys(validatorGroup)
