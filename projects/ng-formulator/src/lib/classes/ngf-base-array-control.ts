@@ -1,4 +1,4 @@
-import { NgfBaseControlConfig } from '../interfaces/control-interfaces/ngf-base-control-config';
+import { NgfBaseControlConfig } from '../interfaces/ngf-base-control-config';
 import { FormArray, FormControl } from '@angular/forms';
 
 export class NgfBaseArrayControl extends FormArray {

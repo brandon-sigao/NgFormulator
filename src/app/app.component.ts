@@ -10,8 +10,9 @@ import { FORM_DEF } from 'src/const/form';
 })
 export class AppComponent {
   public form: NgfFormGroup;
-  constructor(private ngfBuilder: NgfFormBuilderService) {
-    this.form = this.ngfBuilder.group(FORM_DEF);
+  constructor() {
+    this.form = new NgfFormGroup(FORM_DEF);
+    console.log(this.form);
   }
   title = 'FormulatorLibrary';
 }

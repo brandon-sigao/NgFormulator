@@ -1,4 +1,4 @@
-import { NgfBaseControlConfig } from './../interfaces/control-interfaces/ngf-base-control-config';
+import { NgfBaseControlConfig } from '../interfaces/ngf-base-control-config';
 import { FormControl } from '@angular/forms';
 import { NgfValidatorTypeString } from '../types';
 import { NgfValidator } from './ngf-validator';
@@ -25,5 +25,8 @@ export class NgfBaseControl extends FormControl {
 
     public hasValidator(validatorString: NgfValidatorTypeString): boolean {
         return this.validatorStrings.indexOf(validatorString) > -1;
+    }
+    public get displayError(): boolean {
+        return this.invalid && (this.dirty || this.touched);
     }
 }
