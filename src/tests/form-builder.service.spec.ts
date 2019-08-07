@@ -21,8 +21,9 @@ describe('NgfFormBuilderService', () => {
     it('should create an NgfFormGroup',
         inject([NgfFormBuilderService], (service: NgfFormBuilderService) => {
 
-            const group = service.group({
+            const group = service.build({
                 label: 'test',
+                type: 'group',
                 controls: {
                     testControl: {
                         label: 'test control',
@@ -36,18 +37,18 @@ describe('NgfFormBuilderService', () => {
     it('should create recursive levels of groups',
         inject([NgfFormBuilderService], (service: NgfFormBuilderService) => {
 
-            const group = service.group({
+            const group = service.build({
                 label: 'test',
+                type: 'group',
                 controls: {
                     testControl: {
                         label: 'test control',
                         type: 'text',
                         initialValue: 'TEST_VALUE'
-                    }
-                },
-                groups: {
+                    },
                     testGroup: {
                         label: 'Test group',
+                        type: 'group',
                         controls: {
                             testControl2: {
                                 label: 'test control',
@@ -65,8 +66,9 @@ describe('NgfFormBuilderService', () => {
     it('should create text field',
         inject([NgfFormBuilderService], (service: NgfFormBuilderService) => {
 
-            const group = service.group({
+            const group = service.build({
                 label: 'test',
+                type: 'group',
                 controls: {
                     testControl: {
                         label: 'test control',
@@ -80,8 +82,9 @@ describe('NgfFormBuilderService', () => {
     it('should create area field',
         inject([NgfFormBuilderService], (service: NgfFormBuilderService) => {
 
-            const group = service.group({
+            const group = service.build({
                 label: 'test',
+                type: 'group',
                 controls: {
                     testControl: {
                         label: 'test control',
@@ -95,8 +98,9 @@ describe('NgfFormBuilderService', () => {
     it('should create radio field',
         inject([NgfFormBuilderService], (service: NgfFormBuilderService) => {
 
-            const group = service.group({
+            const group = service.build({
                 label: 'test',
+                type: 'group',
                 controls: {
                     testControl: {
                         label: 'test control',
@@ -113,8 +117,9 @@ describe('NgfFormBuilderService', () => {
     it('should create a multi-select field',
         inject([NgfFormBuilderService], (service: NgfFormBuilderService) => {
 
-            const group = service.group({
+            const group = service.build({
                 label: 'test',
+                type: 'group',
                 controls: {
                     testControl: {
                         label: 'test control',

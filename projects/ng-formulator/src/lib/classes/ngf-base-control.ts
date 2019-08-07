@@ -1,12 +1,13 @@
 import { NgfBaseControlConfig } from '../interfaces/ngf-base-control-config';
 import { FormControl } from '@angular/forms';
-import { NgfValidatorTypeString } from '../types';
+import { NgfValidatorTypeString, NgfControlTypeText } from '../types';
 import { NgfValidator } from './ngf-validator';
 
 export class NgfBaseControl extends FormControl {
     public label: string;
     public size: number;
     public validatorStrings: NgfValidatorTypeString[];
+    public type: NgfControlTypeText;
 
     constructor(initalValue: any, config: NgfBaseControlConfig, validators?: NgfValidator[]) {
         let ngValidators;
@@ -20,6 +21,7 @@ export class NgfBaseControl extends FormControl {
 
         this.label = config.label;
         this.size = config.size || 12;
+        this.type = config.type;
         this.validatorStrings = typeList || null;
     }
 

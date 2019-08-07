@@ -7,6 +7,7 @@ describe('BaseInput', () => {
 
     const mockGroup: NgfGroupConfig = {
         label: 'test_group',
+        type: 'group',
         controls: {}
     };
 
@@ -26,7 +27,7 @@ describe('BaseInput', () => {
                 size: 6,
                 type: 'text'
             };
-            const group = service.group(mockGroup);
+            const group = service.build(mockGroup);
             const control = group.get('test_control');
             expect(control.valid).toBeTruthy();
         }));
@@ -42,7 +43,7 @@ describe('BaseInput', () => {
                     required: {}
                 }
             };
-            const group = service.group(mockGroup);
+            const group = service.build(mockGroup);
             const control = group.get('test_control');
             expect(control.valid).toBeFalsy();
             expect(control.errors).toBeDefined();
@@ -63,7 +64,7 @@ describe('BaseInput', () => {
                     }
                 }
             };
-            const group = service.group(mockGroup);
+            const group = service.build(mockGroup);
             const control = group.get('test_control') as NgfBaseControl;
             expect(control.hasValidator('required')).toBeTruthy();
             expect(control.hasValidator('max')).toBeTruthy();

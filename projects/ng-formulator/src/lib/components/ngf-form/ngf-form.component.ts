@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgfFormGroup } from '../../classes';
+import { NgfControlType } from '../../types';
 
 @Component({
   selector: 'ngf-form',
@@ -13,8 +14,11 @@ export class NgfFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.form.getControlsList());
-    console.log(this.form.getGroupsList());
+
+  }
+
+  get controls(): NgfControlType[] {
+    return this.form.getAllControls();
   }
 
 }

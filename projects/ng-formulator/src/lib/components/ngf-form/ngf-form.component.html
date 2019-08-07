@@ -1,3 +1,5 @@
 <form [formGroup]="form">
-  
+  <div *ngFor="let item of controls">
+    {{item.type}}
+  </div>
 </form>
