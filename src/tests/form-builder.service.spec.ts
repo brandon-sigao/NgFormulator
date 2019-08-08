@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { inject } from '@angular/core/testing';
 import { NgfFormBuilderService } from '../../projects/ng-formulator/src/lib/services/ngf-form-builder.service';
 import { NgfTextControl, NgfTextAreaControl, NgfRadioControl, NgfMultiSelectControl } from '../../projects/ng-formulator/src/lib/classes';
+import { NgfTextAreaControlConfig } from 'projects/ng-formulator/src/lib/interfaces';
 
 describe('NgfFormBuilderService', () => {
 
@@ -89,7 +90,7 @@ describe('NgfFormBuilderService', () => {
                     testControl: {
                         label: 'test control',
                         type: 'textarea',
-                    }
+                    } as NgfTextAreaControlConfig
                 }
             });
             const control = group.get('testControl');
@@ -124,11 +125,16 @@ describe('NgfFormBuilderService', () => {
                     testControl: {
                         label: 'test control',
                         type: 'multi',
-                        options: {
-                            1: 'test 1',
-                            2: 'test 2',
-                            3: 'test 3'
-                        }
+                        options: [
+                            {
+                                label: 'test 1',
+                                type: 'boolean',
+                            },
+                            {
+                                label: 'test 2',
+                                type: 'boolean',
+                            }
+                        ]
                     }
                 }
             });

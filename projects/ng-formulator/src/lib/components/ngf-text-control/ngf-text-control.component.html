@@ -1,0 +1,33 @@
+<div *ngIf="control.label" class="label-container">
+  <label for="{{id}}" class="animated fadeInUp faster" *ngIf="fieldHasValue" [style.color]="fieldColor">{{control.label}}
+    <span [style.color]="config.errorColor" *ngIf="required">*</span>
+  </label>
+</div>
+
+<input class="text-input" id="{{id}}" name="{{id}}" [style.border-bottom]="textBorderStyle" [placeholder]="_placeholder"
+  [formControl]="control" (focus)="onFocus()" (blur)="onBlur()" type="text">
+
+<!-- [required]="required" -->
+
+
+<!-- <input *ngIf="type === 'number'"  class="text-input" id="{{id}}" name="{{id}}" [ngClass]="{'focus': isActive}" [placeholder]="_placeholder"
+    [formControl]="control" (focus)="onFocus()" (blur)="onBlur()" type="number" 
+    [required]="required"> -->
+
+<!-- <textarea 
+    *ngIf="type === 'textarea'" 
+    class="text-input" 
+    id="{{id}}"
+    name="{{id}}" 
+    [ngClass]="{'focus': isActive}" 
+    [placeholder]="_placeholder"
+    [rows]="rows"
+    [formControl]="control" 
+    (focus)="onFocus()" 
+    (blur)="onBlur()" 
+    type="text" 
+    [rows]="rows"
+    [required]="required"></textarea> -->
+
+
+<!-- <app-field-error-container [control]="control"></app-field-error-container> -->

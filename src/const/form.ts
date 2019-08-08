@@ -8,9 +8,10 @@ export const FORM_DEF = {
     type: 'group',
     controls: {
         testControl: {
-            label: 'contol label',
+            label: 'Text Control Label',
             type: 'text',
             initialValue: 'BLAH',
+            size: 6,
             validators: {
                 required: true
             }
@@ -18,6 +19,7 @@ export const FORM_DEF = {
         subGroup: {
             label: 'Sub Group',
             type: 'group',
+            size: 6,
             controls: {
                 testSubControl: {
                     label: 'Sub Control',
@@ -28,6 +30,7 @@ export const FORM_DEF = {
         testMulti: {
             label: 'Test Multi',
             type: 'multi',
+            size: 3,
             validators: {
                 required: true
             },

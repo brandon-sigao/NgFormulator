@@ -6,6 +6,6 @@ export interface NgfBaseControlConfig {
     type: NgfControlTypeText;
 
     initialValue?: any;
-    size?: 12 | 6 | 3;
+    size?: 12 | 9 | 6 | 3;
     validators?: NgfValidatorsConfig;
 }

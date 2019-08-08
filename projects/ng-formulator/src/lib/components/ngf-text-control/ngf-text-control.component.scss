@@ -1,0 +1,28 @@
+@import "node_modules/animate.css/animate.min.css";
+
+.label-container {
+    height: 20px;
+
+    label {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 0px;
+        .required {
+            font-weight: bold;
+            font-size: 15px;
+        }
+    }
+}
+
+
+.text-input {
+    width: 100%;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    background-color: transparent;
+
+    &:focus {
+        outline: 0 !important;
+    }
+}

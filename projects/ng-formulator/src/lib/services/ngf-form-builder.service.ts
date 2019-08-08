@@ -31,6 +31,8 @@ export class NgfFormBuilderService {
 
         if (valid) {
             group.id = groupConfig.id;
+            group.size = groupConfig.size || 12;
+            group.label = groupConfig.label;
             this.generateControls(groupConfig.controls, group.id)
                 .forEach(val => group.addControl(val.prop, val.control));
         }

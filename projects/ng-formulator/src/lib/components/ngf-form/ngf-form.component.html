@@ -1,5 +1,8 @@
 <form [formGroup]="form">
-  <div *ngFor="let item of controls">
-    {{item.type}}
+  <div class="row">
+    <div *ngFor="let control of controls" [class]="getFieldClass(control.size)">
+      <ngf-text-control *ngIf="control.type === 'text'" [control]="control"></ngf-text-control>
+      <div *ngIf="control.type !== 'text'">{{control.label}}</div>
+    </div>
   </div>
 </form>
