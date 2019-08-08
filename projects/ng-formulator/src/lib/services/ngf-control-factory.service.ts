@@ -27,6 +27,8 @@ export class NgfControlFactoryService {
     constructor(private logger: NgfLoggerService) { }
 
     public build(config: NgfControlConfigType, validators: NgfValidator[]): NgfControlType {
+
+        // TODO: Get custom validator messages saved to controls
         switch (config.type) {
             case 'text':
                 return this.buildTextControl(config as NgfTextControlConfig, validators);

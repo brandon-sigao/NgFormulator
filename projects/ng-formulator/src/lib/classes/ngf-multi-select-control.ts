@@ -26,12 +26,9 @@ export class NgfMultiSelectControl extends FormArray {
         });
     }
 
-    private setValidState(): void {
-        if (this.required && !this.hasSelected()) {
-            this.setInvalid();
-        } else {
-            this.setValid();
-        }
+    // TODO: test this.  May not work
+    public get displayError(): boolean {
+        return this.invalid && (this.dirty || this.touched);
     }
 
     public getControlsAsArray(): NgfBooleanControl[] {
@@ -41,6 +38,13 @@ export class NgfMultiSelectControl extends FormArray {
         return this.controls.some(control => control.value === true);
     }
 
+    private setValidState(): void {
+        if (this.required && !this.hasSelected()) {
+            this.setInvalid();
+        } else {
+            this.setValid();
+        }
+    }
     private setInvalid(): void {
         this.setErrors({ required: true });
     }

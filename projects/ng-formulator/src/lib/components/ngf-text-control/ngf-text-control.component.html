@@ -1,11 +1,11 @@
-<div *ngIf="control.label" class="label-container">
-  <label for="{{id}}" class="animated fadeInUp faster" *ngIf="fieldHasValue" [style.color]="fieldColor">{{control.label}}
-    <span [style.color]="config.errorColor" *ngIf="required">*</span>
-  </label>
-</div>
+<ngf-control-label [id]="id" [label]="control.label" [required]="required" [color]="fieldColor"
+  [fieldHasValue]="fieldHasValue"></ngf-control-label>
 
 <input class="text-input" id="{{id}}" name="{{id}}" [style.border-bottom]="textBorderStyle" [placeholder]="_placeholder"
   [formControl]="control" (focus)="onFocus()" (blur)="onBlur()" type="text">
+
+<ngf-validation-error [control]="control"></ngf-validation-error>
+
 
 <!-- [required]="required" -->
 

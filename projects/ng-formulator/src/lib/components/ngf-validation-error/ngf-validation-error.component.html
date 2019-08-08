@@ -1,0 +1,17 @@
+<div *ngIf="control.displayError">
+    <div *ngIf="control.errors.required">
+      Field is required.
+    </div>
+    <div *ngIf="control.errors.minlength">
+      Field is too short
+    </div>
+    <div *ngIf="control.errors.maxlength">
+      Field is too long
+    </div>
+    <div *ngIf="control.errors.pattern">
+      Field is improper format
+    </div>
+    <div *ngIf="control.errors.email">
+      Email is improper format
+    </div>
+  </div>

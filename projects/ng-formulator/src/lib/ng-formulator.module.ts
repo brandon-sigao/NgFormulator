@@ -8,9 +8,16 @@ import { NgfValidatorFactoryService } from './services/ngf-validator-factory.ser
 import { NgfLoggerService } from './services/ngf-logger.service';
 import { NgfTextControlComponent } from './components/ngf-text-control/ngf-text-control.component';
 import { NgfConfig } from './interfaces/ngf-config';
+import { NgfControlLabelComponent } from './components/ngf-control-label/ngf-control-label.component';
+import { NgfValidationErrorComponent } from './components/ngf-validation-error/ngf-validation-error.component';
 
 @NgModule({
-  declarations: [NgfFormComponent, NgfTextControlComponent],
+  declarations: [
+    NgfFormComponent,
+    NgfTextControlComponent,
+    NgfControlLabelComponent,
+    NgfValidationErrorComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule

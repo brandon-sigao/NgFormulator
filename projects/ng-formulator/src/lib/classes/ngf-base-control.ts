@@ -8,19 +8,7 @@ export class NgfBaseControl extends FormControl {
     public type: NgfControlTypeText;
 
     constructor(initalValue: any, validators?: ValidatorFn[]) {
-        // let ngValidators;
-        // let typeList;
-        // if (validators) {
-        //     ngValidators = validators.map(v => v.validatorFunction);
-        //     typeList = validators.map(v => v.type);
-        // }
-
         super(initalValue, validators);
-
-        // this.label = config.label;
-        // this.size = config.size || 12;
-        // this.type = config.type;
-        // this.validatorStrings = typeList || null;
     }
 
     public hasValidator(validatorString: NgfValidatorTypeString): boolean {

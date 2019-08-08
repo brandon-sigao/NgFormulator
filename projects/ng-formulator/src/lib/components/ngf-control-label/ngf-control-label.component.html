@@ -1,0 +1,6 @@
+<div class="label-container">
+  <label for="{{id}}" class="animated fadeInUp faster" *ngIf="fieldHasValue"
+    [style.color]="color">{{label}}
+    <span class="required" [style.color]="config.errorColor" *ngIf="required">*</span>
+  </label>
+</div>

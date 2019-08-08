@@ -43,11 +43,6 @@ export class NgfTextControlComponent implements OnInit {
     let value = '';
     value = this.control.label;
     value += (this.required) ? '*' : '';
-    // Use label for placeholder if label exists and placeholder does not
-    // value = (this.label && this.placeholder === '') ? this.label : this.placeholder;
-
-    // if there's a placeholder, and field is required, add indicator
-    // value = (this.required && value.length > 0) ? (value + ' *') : value;
     return value;
   }
 
