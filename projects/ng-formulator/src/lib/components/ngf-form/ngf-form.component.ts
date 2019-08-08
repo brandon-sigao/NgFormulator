@@ -18,7 +18,7 @@ export class NgfFormComponent implements OnInit {
   }
 
   get controls(): NgfControlType[] {
-    return this.form.getAllControls();
+    return this.form.getControlsAsArray();
   }
 
 }

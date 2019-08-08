@@ -1,32 +1,45 @@
-import { FormControl } from '@angular/forms';
-import { NgfMultiSelectControlConfig } from '../interfaces/control-interfaces/ngf-multi-select-control-config';
-import { NgfBaseArrayControl } from './ngf-base-array-control';
-import { Subscription, Observable, merge } from 'rxjs';
+import { FormArray } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { NgfBooleanControl } from './ngf-boolean-control';
+import { NgfControlTypeText } from '../types';
 
-export class NgfMultiSelectControl extends NgfBaseArrayControl {
+export class NgfMultiSelectControl extends FormArray {
 
     // https://stackoverflow.com/questions/40927167/angular-reactiveforms-producing-an-array-of-checkbox-values
-    public options: { [key: string]: string } | { [key: number]: string };
-    public valuesObservable: Observable<any>;
+
     public valuesSubscription: Subscription;
 
-    constructor(config: NgfMultiSelectControlConfig) {
+    public label: string;
+    public size: number;
+    public required: boolean;
+    public type: NgfControlTypeText;
 
-        const controls = Object.keys(config.options).map(k => new FormControl(false));
-        super(controls, config);
-        this.valuesObservable = merge(this.controls.map(control => control.valueChanges));
-        // TODO: probably need to move this into the base
-        // TODO: values array will need IDs for proper selection of check boxes
-        this.valuesSubscription = this.valuesObservable.subscribe((values) => {
-            if (this.required && !this.hasSelected()) {
-                this.setInvalid();
-            } else {
-                this.setValid();
-            }
+    constructor(controls: NgfBooleanControl[], required: boolean) {
+        super(controls);
+
+        this.type = 'multi';
+        this.required = required;
+
+        this.setValidState();
+        this.valueChanges.subscribe((values) => {
+            this.setValidState();
         });
-        this.options = config.options;
     }
 
+    private setValidState(): void {
+        if (this.required && !this.hasSelected()) {
+            this.setInvalid();
+        } else {
+            this.setValid();
+        }
+    }
+
+    public getControlsAsArray(): NgfBooleanControl[] {
+        return this.controls as NgfBooleanControl[];
+    }
+    public hasSelected(): boolean {
+        return this.controls.some(control => control.value === true);
+    }
 
     private setInvalid(): void {
         this.setErrors({ required: true });

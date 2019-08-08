@@ -1,4 +1,8 @@
-import { NgfTextControlConfig, NgfGroupConfig } from 'projects/ng-formulator/src/lib/interfaces';
+import {
+    NgfTextControlConfig,
+    NgfGroupConfig, NgfMultiSelectControlConfig,
+    NgfBooleanControlConfig
+} from 'projects/ng-formulator/src/lib/interfaces';
 export const FORM_DEF = {
     label: 'test',
     type: 'group',
@@ -20,6 +24,27 @@ export const FORM_DEF = {
                     type: 'text'
                 } as NgfTextControlConfig
             }
-        } as NgfGroupConfig
+        } as NgfGroupConfig,
+        testMulti: {
+            label: 'Test Multi',
+            type: 'multi',
+            validators: {
+                required: true
+            },
+            options: [
+                {
+                    label: 'Label 1',
+                    type: 'boolean',
+                    initialValue: false,
+                    selectedValue: '2130000',
+                },
+                {
+                    label: 'Label 2',
+                    type: 'boolean',
+                    initialValue: false,
+                    selectedValue: '2130001',
+                }
+            ] as NgfBooleanControlConfig[]
+        } as NgfMultiSelectControlConfig
     }
 } as NgfGroupConfig;

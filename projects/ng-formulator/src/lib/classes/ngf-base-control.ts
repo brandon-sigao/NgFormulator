@@ -1,7 +1,5 @@
-import { NgfBaseControlConfig } from '../interfaces/ngf-base-control-config';
-import { FormControl } from '@angular/forms';
+import { FormControl, ValidatorFn } from '@angular/forms';
 import { NgfValidatorTypeString, NgfControlTypeText } from '../types';
-import { NgfValidator } from './ngf-validator';
 
 export class NgfBaseControl extends FormControl {
     public label: string;
@@ -9,20 +7,20 @@ export class NgfBaseControl extends FormControl {
     public validatorStrings: NgfValidatorTypeString[];
     public type: NgfControlTypeText;
 
-    constructor(initalValue: any, config: NgfBaseControlConfig, validators?: NgfValidator[]) {
-        let ngValidators;
-        let typeList;
-        if (validators) {
-            ngValidators = validators.map(v => v.validatorFunction);
-            typeList = validators.map(v => v.type);
-        }
+    constructor(initalValue: any, validators?: ValidatorFn[]) {
+        // let ngValidators;
+        // let typeList;
+        // if (validators) {
+        //     ngValidators = validators.map(v => v.validatorFunction);
+        //     typeList = validators.map(v => v.type);
+        // }
 
-        super(initalValue, ngValidators);
+        super(initalValue, validators);
 
-        this.label = config.label;
-        this.size = config.size || 12;
-        this.type = config.type;
-        this.validatorStrings = typeList || null;
+        // this.label = config.label;
+        // this.size = config.size || 12;
+        // this.type = config.type;
+        // this.validatorStrings = typeList || null;
     }
 
     public hasValidator(validatorString: NgfValidatorTypeString): boolean {

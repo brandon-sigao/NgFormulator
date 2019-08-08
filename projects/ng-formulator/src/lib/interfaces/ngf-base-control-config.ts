@@ -3,8 +3,9 @@ import { NgfValidatorsConfig } from './validator-interfaces';
 
 export interface NgfBaseControlConfig {
     label: string;
-    initialValue?: any;
-    size?: number;
     type: NgfControlTypeText;
+
+    initialValue?: any;
+    size?: 12 | 6 | 3;
     validators?: NgfValidatorsConfig;
 }
