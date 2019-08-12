@@ -1,10 +1,10 @@
 import { NgfBaseControl } from './ngf-base-control';
-import { NgfSelectOption } from '../interfaces/control-interfaces/ngf-select-option';
+import { ISelectOption } from './../interfaces/class-interfaces/select-option.interface';
 import { ValidatorFn } from '@angular/forms';
 
 export class NgfRadioControl extends NgfBaseControl {
 
-    public options: NgfSelectOption[];
+    public options: ISelectOption[];
 
     constructor(initialValue: string, validators?: ValidatorFn[]) {
         super(initialValue, validators);

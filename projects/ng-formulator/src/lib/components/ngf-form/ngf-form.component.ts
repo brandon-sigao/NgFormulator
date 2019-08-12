@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgfFormGroup } from '../../classes';
 import { NgfControlType } from '../../types';
 
 @Component({
   selector: 'ngf-form',
   templateUrl: './ngf-form.component.html',
-  styleUrls: ['./ngf-form.component.scss']
+  styleUrls: ['./ngf-form.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NgfFormComponent implements OnInit {
 

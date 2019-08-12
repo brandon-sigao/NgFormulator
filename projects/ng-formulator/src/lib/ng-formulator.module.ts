@@ -7,16 +7,21 @@ import { NgfControlFactoryService } from './services/ngf-control-factory.service
 import { NgfValidatorFactoryService } from './services/ngf-validator-factory.service';
 import { NgfLoggerService } from './services/ngf-logger.service';
 import { NgfTextControlComponent } from './components/ngf-text-control/ngf-text-control.component';
-import { NgfConfig } from './interfaces/ngf-config';
+import { NgfConfig } from './interfaces/base-config/ngf-config';
 import { NgfControlLabelComponent } from './components/ngf-control-label/ngf-control-label.component';
 import { NgfValidationErrorComponent } from './components/ngf-validation-error/ngf-validation-error.component';
+import { NgfTextareaControlComponent } from './components/ngf-textarea-control/ngf-textarea-control.component';
+import { NgfControlService } from './services/ngf-control.service';
+import { NgfNumberControlComponent } from './components/ngf-number-control/ngf-number-control.component';
 
 @NgModule({
   declarations: [
     NgfFormComponent,
     NgfTextControlComponent,
     NgfControlLabelComponent,
-    NgfValidationErrorComponent
+    NgfValidationErrorComponent,
+    NgfTextareaControlComponent,
+    NgfNumberControlComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +31,8 @@ import { NgfValidationErrorComponent } from './components/ngf-validation-error/n
     NgfFormBuilderService,
     NgfControlFactoryService,
     NgfValidatorFactoryService,
-    NgfLoggerService
+    NgfLoggerService,
+    NgfControlService
   ],
   exports: [NgfFormComponent]
 })

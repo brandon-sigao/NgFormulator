@@ -1,11 +1,13 @@
 import { FormControl, ValidatorFn } from '@angular/forms';
 import { NgfValidatorTypeString, NgfControlTypeText } from '../types';
+import { IFormItem, IValidated } from '../interfaces';
 
-export class NgfBaseControl extends FormControl {
+export class NgfBaseControl extends FormControl implements IFormItem, IValidated {
+    public id: string;
     public label: string;
-    public size: number;
-    public validatorStrings: NgfValidatorTypeString[];
+    public size: 12 | 9 | 6 | 3;
     public type: NgfControlTypeText;
+    public validatorStrings: NgfValidatorTypeString[];
 
     constructor(initalValue: any, validators?: ValidatorFn[]) {
         super(initalValue, validators);

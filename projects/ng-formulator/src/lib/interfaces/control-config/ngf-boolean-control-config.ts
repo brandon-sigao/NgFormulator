@@ -1,4 +1,4 @@
-import { NgfBaseControlConfig } from '../ngf-base-control-config';
+import { NgfBaseControlConfig } from './ngf-base-control-config';
 
 export interface NgfBooleanControlConfig extends NgfBaseControlConfig {
     type: 'boolean';

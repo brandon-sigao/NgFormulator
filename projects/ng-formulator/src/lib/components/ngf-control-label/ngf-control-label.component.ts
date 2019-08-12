@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { NgfConfig } from '../../interfaces/ngf-config';
+import { NgfConfig } from '../../interfaces/base-config/ngf-config';
 
 @Component({
   selector: 'ngf-control-label',

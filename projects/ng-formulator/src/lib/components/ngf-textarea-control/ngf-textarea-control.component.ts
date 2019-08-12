@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, HostBinding, Inject } from '@angular/core';
-import { NgfTextControl } from '../../classes';
-import { NgfConfig } from '../../interfaces/base-config/ngf-config';
+import { NgfTextControl } from './../../classes/ngf-text-control';
+import { Component, OnInit, Inject, HostBinding, Input } from '@angular/core';
 import { NgfControlService } from '../../services/ngf-control.service';
+import { NgfConfig } from '../../interfaces';
+import { NgfTextAreaControl } from '../../classes';
 
 @Component({
-  selector: 'ngf-text-control',
-  templateUrl: './ngf-text-control.component.html',
-  styleUrls: ['./ngf-text-control.component.scss'],
+  selector: 'ngf-textarea-control',
+  templateUrl: './ngf-textarea-control.component.html',
+  styleUrls: ['./ngf-textarea-control.component.scss'],
   providers: [NgfControlService]
 })
-export class NgfTextControlComponent implements OnInit {
+export class NgfTextareaControlComponent implements OnInit {
 
   @Input() private set control(val: NgfTextControl) {
     this.service.setup(val, this.config);
@@ -26,10 +27,12 @@ export class NgfTextControlComponent implements OnInit {
     public service: NgfControlService) {
   }
 
-  ngOnInit() { }
-
-  get fieldHasValue() {
+  ngOnInit() {
+  }
+  get fieldHasValue(): boolean {
     return (this.service.control.value !== null) && (this.service.control.value !== '');
   }
-
+  get textAreaClass(): string {
+    return `text-input input-sizer-${(this.service.control as NgfTextAreaControl).rows}`;
+  }
 }

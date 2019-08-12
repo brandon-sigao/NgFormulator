@@ -1,24 +1,29 @@
 import { FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NgfBooleanControl } from './ngf-boolean-control';
-import { NgfControlTypeText } from '../types';
+import { NgfControlTypeText, NgfValidatorTypeString } from '../types';
+import { IValidated, IFormItem } from '../interfaces';
 
-export class NgfMultiSelectControl extends FormArray {
+export class NgfMultiSelectControl extends FormArray implements IFormItem, IValidated {
 
-    // https://stackoverflow.com/questions/40927167/angular-reactiveforms-producing-an-array-of-checkbox-values
-
-    public valuesSubscription: Subscription;
-
+    public id: string;
     public label: string;
-    public size: number;
+    public size: 12 | 9 | 6 | 3;
     public required: boolean;
     public type: NgfControlTypeText;
+
+    public valuesSubscription: Subscription;
+    public validatorStrings: NgfValidatorTypeString[];
 
     constructor(controls: NgfBooleanControl[], required: boolean) {
         super(controls);
 
         this.type = 'multi';
         this.required = required;
+
+        // For now, just force the validator strings because there's only 1 type of validation
+        // for this type of control
+        this.validatorStrings = (this.required) ? ['required'] : [];
 
         this.setValidState();
         this.valueChanges.subscribe((values) => {
@@ -29,6 +34,9 @@ export class NgfMultiSelectControl extends FormArray {
     // TODO: test this.  May not work
     public get displayError(): boolean {
         return this.invalid && (this.dirty || this.touched);
+    }
+    public hasValidator(validatorString: NgfValidatorTypeString): boolean {
+        return this.validatorStrings.indexOf(validatorString) > -1;
     }
 
     public getControlsAsArray(): NgfBooleanControl[] {

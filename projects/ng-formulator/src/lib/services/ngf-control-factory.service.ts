@@ -12,14 +12,16 @@ import {
     NgfTextAreaControlConfig,
     NgfRadioControlConfig,
     NgfMultiSelectControlConfig,
-    NgfBooleanControlConfig
-} from './../interfaces/control-interfaces';
+    NgfBooleanControlConfig,
+    NgfNumberControlConfig
+} from '../interfaces/control-config';
 import { NgfControlConfigType } from './../types/ngf-control-config-type';
 import { Injectable } from '@angular/core';
 import { NgfControlType, NgfValidatorTypeString } from '../types';
 import { checkObject } from '../util/check-object.util';
 import { NgfValidator } from './../classes';
 import { NgfLoggerService } from './ngf-logger.service';
+import { NgfNumberControl } from '../classes/ngf-number-control';
 
 @Injectable()
 export class NgfControlFactoryService {
@@ -40,6 +42,8 @@ export class NgfControlFactoryService {
                 return this.buildBooleanControl(config as NgfBooleanControlConfig, validators);
             case 'multi':
                 return this.buildMultiSelectControl(config as NgfMultiSelectControlConfig, validators);
+            case 'number':
+                return this.buildNumberControl(config as NgfNumberControlConfig, validators);
         }
         return null;
     }
@@ -60,6 +64,21 @@ export class NgfControlFactoryService {
         return control;
     }
 
+    private buildNumberControl(
+        config: NgfNumberControlConfig,
+        ngfValidators: NgfValidator[]): NgfTextControl {
+
+        const initialValue = config.initialValue || null;
+        const ngValidators = ngfValidators.map(v => v.validatorFunction);
+        const validatorStrings = ngfValidators.map(v => v.type);
+
+        // build control
+        const control = new NgfNumberControl(initialValue, ngValidators);
+        this.assignBaseControlValues(control, config, validatorStrings);
+
+        return control;
+    }
+
     private buildTextAreaControl(
         config: NgfTextAreaControlConfig,
         ngfValidators: NgfValidator[]): NgfTextAreaControl {
@@ -71,7 +90,7 @@ export class NgfControlFactoryService {
         // build control
         const control = new NgfTextAreaControl(initialValue, ngValidators);
         this.assignBaseControlValues(control, config, validatorStrings);
-
+        control.rows = (config.rows) ? config.rows : 1;
         return control;
     }
 
@@ -131,6 +150,7 @@ export class NgfControlFactoryService {
 
             control.label = config.label;
             control.size = config.size || 12;
+            control.id = this.generateId(config.id);
 
             return control;
         } catch (e) {
@@ -147,5 +167,14 @@ export class NgfControlFactoryService {
         control.label = config.label;
         control.size = config.size || 12;
         control.validatorStrings = validatorStrings || null;
+        control.id = this.generateId(config.id);
+    }
+
+    private generateId(configId: string): string {
+        if (configId !== undefined && configId !== null && configId !== '') {
+            return configId;
+        } else {
+            return Guid.create().toString();
+        }
     }
 }

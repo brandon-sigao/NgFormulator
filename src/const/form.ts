@@ -1,8 +1,11 @@
 import {
     NgfTextControlConfig,
     NgfGroupConfig, NgfMultiSelectControlConfig,
-    NgfBooleanControlConfig
-} from 'projects/ng-formulator/src/lib/interfaces';
+    NgfBooleanControlConfig,
+    NgfTextAreaControlConfig
+} from 'ng-formulator';
+import { NgfNumberControl } from 'projects/ng-formulator/src/public-api';
+
 export const FORM_DEF = {
     label: 'test',
     type: 'group',
@@ -16,6 +19,26 @@ export const FORM_DEF = {
                 required: true
             }
         } as NgfTextControlConfig,
+        testAreaControl: {
+            label: 'Text Area Control Label',
+            type: 'textarea',
+            size: 6,
+            rows: 3,
+            validators: {
+                required: true
+            }
+        } as NgfTextAreaControlConfig,
+        testControl2: {
+            label: 'Text Control 2 Label',
+            type: 'text',
+            initialValue: 'BLAH',
+            size: 6
+        } as NgfTextControlConfig,
+        numberControl: {
+            label: 'Number Control Label',
+            type: 'number',
+            size: 12
+        } as NgfNumberControl,
         subGroup: {
             label: 'Sub Group',
             type: 'group',

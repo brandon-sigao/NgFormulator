@@ -2,7 +2,12 @@
   <div class="row">
     <div *ngFor="let control of controls" [class]="getFieldClass(control.size)">
       <ngf-text-control *ngIf="control.type === 'text'" [control]="control"></ngf-text-control>
-      <div *ngIf="control.type !== 'text'">{{control.label}}</div>
+      <ngf-textarea-control *ngIf="control.type === 'textarea'" [control]="control"></ngf-textarea-control>
+      <ngf-number-control *ngIf="control.type === 'number'" [control]="control"></ngf-number-control>
+      <div *ngIf="
+      control.type !== 'text' 
+      && control.type !== 'textarea'
+      && control.type !== 'number'">{{control.label}}</div>
     </div>
   </div>
 </form>

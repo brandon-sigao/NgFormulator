@@ -1,6 +1,10 @@
-import { NgfTextControlConfig, NgfTextAreaControlConfig, NgfGroupConfig, NgfBooleanControlConfig } from './../interfaces';
-import { NgfRadioControlConfig } from '../interfaces/control-interfaces/ngf-radio-control-config';
-import { NgfMultiSelectControlConfig } from '../interfaces/control-interfaces/ngf-multi-select-control-config';
+import {
+    NgfTextControlConfig,
+    NgfTextAreaControlConfig, NgfGroupConfig,
+    NgfBooleanControlConfig, NgfNumberControlConfig
+} from './../interfaces';
+import { NgfRadioControlConfig } from '../interfaces/control-config/ngf-radio-control-config';
+import { NgfMultiSelectControlConfig } from '../interfaces/control-config/ngf-multi-select-control-config';
 
 export type NgfControlConfigType =
     NgfTextControlConfig |
@@ -8,4 +12,5 @@ export type NgfControlConfigType =
     NgfRadioControlConfig |
     NgfMultiSelectControlConfig |
     NgfBooleanControlConfig |
+    NgfNumberControlConfig |
     NgfGroupConfig;

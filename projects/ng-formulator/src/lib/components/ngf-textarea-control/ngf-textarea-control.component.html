@@ -1,0 +1,19 @@
+<ngf-control-label 
+[id]="service.id" 
+[label]="service.label" 
+[required]="service.required" 
+[color]="service.fieldColor"
+[fieldHasValue]="fieldHasValue"></ngf-control-label>
+
+<textarea 
+  [class]="textAreaClass"
+  id="{{service.id}}"
+  name="{{service.id}}" 
+  [placeholder]="service.placeholder"
+  [formControl]="service.control" 
+  (focus)="service.onFocus()" 
+  (blur)="service.onBlur()" 
+  type="text" 
+  [required]="service.required"></textarea>
+
+  <ngf-validation-error [control]="service.control"></ngf-validation-error>

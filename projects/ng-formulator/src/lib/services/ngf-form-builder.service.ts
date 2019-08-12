@@ -1,4 +1,4 @@
-import { NgfGroupConfig } from './../interfaces/group-interfaces/ngf-group-config';
+import { NgfGroupConfig } from '../interfaces/group-config/ngf-group-config';
 import { NgfControlConfigType } from './../types/ngf-control-config-type';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';

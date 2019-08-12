@@ -1,17 +1,17 @@
 import { Component, OnInit, Input, HostBinding, Inject } from '@angular/core';
-import { NgfTextControl } from '../../classes';
-import { NgfConfig } from '../../interfaces/base-config/ngf-config';
+import { NgfNumberControl } from '../../classes/ngf-number-control';
 import { NgfControlService } from '../../services/ngf-control.service';
+import { NgfConfig } from '../../interfaces';
 
 @Component({
-  selector: 'ngf-text-control',
-  templateUrl: './ngf-text-control.component.html',
-  styleUrls: ['./ngf-text-control.component.scss'],
+  selector: 'ngf-number-control',
+  templateUrl: './ngf-number-control.component.html',
+  styleUrls: ['./ngf-number-control.component.scss'],
   providers: [NgfControlService]
 })
-export class NgfTextControlComponent implements OnInit {
+export class NgfNumberControlComponent implements OnInit {
 
-  @Input() private set control(val: NgfTextControl) {
+  @Input() private set control(val: NgfNumberControl) {
     this.service.setup(val, this.config);
   }
 

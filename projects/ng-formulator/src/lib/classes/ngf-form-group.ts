@@ -1,10 +1,11 @@
 import { FormGroup } from '@angular/forms';
 import { NgfControlType } from '../types';
+import { IFormItem } from '../interfaces';
 
-export class NgfFormGroup extends FormGroup {
+export class NgfFormGroup extends FormGroup implements IFormItem {
     public label: string;
     public id: string;
-    public type: string;
+    public type: 'group';
     public size: 12 | 9 | 6 | 3;
     constructor() {
         super({}, null);

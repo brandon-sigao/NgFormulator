@@ -1,4 +1,4 @@
-export interface NgfSelectOption {
+export interface ISelectOption {
     label: string;
     value: string;
     id: string;

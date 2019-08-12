@@ -1,14 +1,14 @@
-import { NgfConfig } from './../../interfaces/ngf-config';
+import { NgfConfig } from '../../interfaces/base-config/ngf-config';
 import { Component, OnInit, HostBinding, Input, Inject } from '@angular/core';
-import { NgfControlType } from './../../types/ngf-control-type';
 import { NgfBaseControl } from '../../classes';
 
 @Component({
   selector: 'ngf-validation-error',
   templateUrl: './ngf-validation-error.component.html',
-  styleUrls: ['./ngf-validation-error.component.scss']
+  styleUrls: ['./ngf-validation-error.component.scss'],
 })
 export class NgfValidationErrorComponent implements OnInit {
+
   @Input() control: NgfBaseControl;
 
   @HostBinding('style.padding-top') paddingTop = '2px';

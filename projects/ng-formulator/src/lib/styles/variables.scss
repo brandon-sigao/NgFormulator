@@ -1,0 +1,7 @@
+$label-height: 22px;
+$input-height: 27px;
+$error-height: 16px;
+
+$input-bottom-margin: 15px;
+
+$row-height: calc(#{$label-height} + #{$input-height} + #{$error-height});
