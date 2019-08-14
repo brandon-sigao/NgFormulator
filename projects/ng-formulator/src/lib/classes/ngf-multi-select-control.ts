@@ -1,16 +1,17 @@
 import { FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NgfBooleanControl } from './ngf-boolean-control';
-import { NgfControlTypeText, NgfValidatorTypeString } from '../types';
+import { NgfControlTypeText, NgfValidatorTypeString, NgfSize } from '../types';
 import { IValidated, IFormItem } from '../interfaces';
 
 export class NgfMultiSelectControl extends FormArray implements IFormItem, IValidated {
 
     public id: string;
     public label: string;
-    public size: 12 | 9 | 6 | 3;
+    public size: NgfSize;
     public required: boolean;
     public type: NgfControlTypeText;
+    public rows: number;
 
     public valuesSubscription: Subscription;
     public validatorStrings: NgfValidatorTypeString[];

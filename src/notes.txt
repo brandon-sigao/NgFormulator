@@ -1,16 +1,20 @@
 
+// CURRENT
+ -form group (new styling based on what Candace showed me)
+
 // TODO (short term)
 -make date/time control 
--make number control
--make boolean control
 -add about a billion more tests
--create form group component
--create component for:
-    -text field
-    -text area field
+-create UI component for:
     -radio field
     -multi-select field
     -date/time field
+   
+    -date/time
+- subdivide columns (make it so you can stack two 3s horizontally under a 6 in a multi-line row)
+- custom validation messages
+- margin to top/bottom of inputs
+- try and get it as mobile compliant as we can
 
 // TODO (medium term)
 -Increase customizations on components
@@ -20,6 +24,8 @@
 // TODO (Long term)
 -Add show/hide logic
     -make sure validations don't fail when hidden
+    -allow show/hide on a group level
+    -figure out if controls should collapse on disappear or keep their sizing?
 
 // adding bootstrap
 https://stackoverflow.com/questions/54223504/angular-6-library-using-bootstrap

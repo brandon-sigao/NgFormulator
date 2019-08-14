@@ -1,4 +1,4 @@
-import { NgfControlTypeText } from '../../types';
+import { NgfControlTypeText, NgfSize } from '../../types';
 import { NgfValidatorsConfig } from '../validator-config';
 
 export interface NgfBaseControlConfig  {
@@ -7,6 +7,6 @@ export interface NgfBaseControlConfig  {
 
     id?: string;
     initialValue?: any;
-    size?: 12 | 9 | 6 | 3;
+    size?: NgfSize;
     validators?: NgfValidatorsConfig;
 }

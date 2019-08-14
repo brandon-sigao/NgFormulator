@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="row">
+  <!-- <div class="row">
     <div *ngFor="let control of controls" [class]="getFieldClass(control.size)">
       <ngf-text-control *ngIf="control.type === 'text'" [control]="control"></ngf-text-control>
       <ngf-textarea-control *ngIf="control.type === 'textarea'" [control]="control"></ngf-textarea-control>
@@ -8,6 +8,20 @@
       control.type !== 'text' 
       && control.type !== 'textarea'
       && control.type !== 'number'">{{control.label}}</div>
+    </div>
+  </div> -->
+
+  <div class="row" *ngFor="let row of rows">
+    <div *ngFor="let column of row.columns" [class]="column.class">
+      <div *ngFor="let control of column.content">
+        <ngf-text-control *ngIf="control.type === 'text'" [control]="control"></ngf-text-control>
+        <ngf-textarea-control *ngIf="control.type === 'textarea'" [control]="control"></ngf-textarea-control>
+        <ngf-number-control *ngIf="control.type === 'number'" [control]="control"></ngf-number-control>
+        <div *ngIf="
+          control.type !== 'text' 
+          && control.type !== 'textarea'
+          && control.type !== 'number'">{{control.label}}</div>
+      </div>
     </div>
   </div>
 </form>

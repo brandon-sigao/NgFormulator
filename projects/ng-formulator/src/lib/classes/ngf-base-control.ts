@@ -1,16 +1,18 @@
 import { FormControl, ValidatorFn } from '@angular/forms';
-import { NgfValidatorTypeString, NgfControlTypeText } from '../types';
+import { NgfValidatorTypeString, NgfControlTypeText, NgfSize } from '../types';
 import { IFormItem, IValidated } from '../interfaces';
 
 export class NgfBaseControl extends FormControl implements IFormItem, IValidated {
     public id: string;
     public label: string;
-    public size: 12 | 9 | 6 | 3;
+    public size: NgfSize;
     public type: NgfControlTypeText;
     public validatorStrings: NgfValidatorTypeString[];
+    public rows: number;
 
     constructor(initalValue: any, validators?: ValidatorFn[]) {
         super(initalValue, validators);
+        this.rows = 1;
     }
 
     public hasValidator(validatorString: NgfValidatorTypeString): boolean {

@@ -1,37 +1,29 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgfFormGroup } from '../../classes';
 import { NgfControlType } from '../../types';
+import { NgfGroupService } from '../../services/ngf-group.service';
+import { IFormRow } from '../../interfaces';
 
 @Component({
   selector: 'ngf-form',
   templateUrl: './ngf-form.component.html',
   styleUrls: ['./ngf-form.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [
+    NgfGroupService
+  ]
 })
 export class NgfFormComponent implements OnInit {
 
   @Input() form: NgfFormGroup;
 
-  constructor() { }
+  public rows: IFormRow[];
+
+  constructor(private groupService: NgfGroupService) { }
 
   ngOnInit() {
-
-  }
-
-  get controls(): NgfControlType[] {
-    return this.form.getControlsAsArray();
-  }
-
-  public getFieldClass(size: number): string {
-    switch (size) {
-      case 3:
-        return 'col-12 col-sm-6 col-md-3';
-      case 6:
-        return 'col-12 col-sm-8 col-md-6';
-      case 9:
-        return 'col-12 col-sm-8 col-md-6';
-      default:
-        return 'col-12';
-    }
+    const controls = this.form.getControlsAsArray();
+    this.rows = this.groupService.buildRowList(controls);
+    console.log(this.rows);
   }
 }

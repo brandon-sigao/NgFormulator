@@ -1,7 +1,9 @@
 import { NgfControlTypeText } from '../../types/ngf-control-type-string';
+import { NgfSize } from '../../types';
 export interface IFormItem {
     id: string;
     label: string;
-    size: 12 | 9 | 6 | 3;
+    size: NgfSize;
     type: NgfControlTypeText;
+    rows: number;
 }
