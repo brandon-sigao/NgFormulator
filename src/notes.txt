@@ -1,6 +1,6 @@
 
 // CURRENT
-
+- Figure out dependencies vs peer dependencies
 // TODO (1.0.0) 
 -styling
     -make HR tags extend to edge of form area

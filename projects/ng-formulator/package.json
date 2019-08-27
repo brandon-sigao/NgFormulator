@@ -7,5 +7,6 @@
     "bootstrap": "^4.3.1",
     "animate.css": "^3.7.2",
     "guid-typescript": "1.0.9"
-  }
+  },
+  "dependencies": {}
 }
