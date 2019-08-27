@@ -8,7 +8,6 @@ import {
     NgfTextControlConfig, NgfNumberControlConfig,
     NgfGroupConfig, NgfBooleanControlConfig, NgfMultiSelectControlConfig, IFormColumn
 } from '../interfaces';
-import * as _ from 'lodash';
 import { NgfTextAreaControl } from '../classes';
 import { NgfControlType } from '../types';
 

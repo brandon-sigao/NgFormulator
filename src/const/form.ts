@@ -5,51 +5,48 @@ import {
     NgfTextAreaControlConfig,
     NgfNumberControlConfig
 } from 'ng-formulator';
+import { address } from './address';
 
 export const FORM_DEF = {
-    label: 'test',
+    label: 'Contact Info',
     type: 'group',
     controls: {
-        testControl: {
-            label: 'Text Control Label',
+        firstName: {
+            label: 'First Name',
             type: 'text',
-            initialValue: 'BLAH',
             size: 6,
             validators: { required: true }
         } as NgfTextControlConfig,
-
-        testAreaControl: {
-            label: 'Text Area Control Label',
+        outYou: {
+            label: 'Tell us about yourself',
             type: 'textarea',
             size: 6,
             rows: 3,
-            initialValue: 'test',
-            validators: { required: true }
         } as NgfTextAreaControlConfig,
         testControl2: {
-            label: 'Text Control 2 Label',
+            label: 'Last Name',
             type: 'text',
-            initialValue: 'BLAH',
-            size: 6
+            size: 6,
+            validators: { required: true }
         } as NgfTextControlConfig,
         numberControl: {
-            label: 'Number Control Label',
+            label: 'Age',
             type: 'number',
             size: 6
         } as NgfNumberControlConfig,
 
-        // unfinished
-        subGroup: {
-            label: 'Sub Group',
+        // SUBGROUP
+        address,
+        subGroup2: {
+            label: 'Sub Group 2',
             type: 'group',
-            size: 6,
             controls: {
-                testSubControl: {
-                    label: 'Sub Control',
-                    type: 'text'
-                } as NgfTextControlConfig
+                subgroupd2Control: {
+                    label: 'Sub Group 2 Control',
+                    type: 'text',
+                }
             }
-        } as NgfGroupConfig,
+        },
         testMulti: {
             label: 'Test Multi',
             type: 'multi',

@@ -32,3 +32,14 @@
         outline: 0 !important;
     }
 }
+
+.ngf-hr {
+    border-bottom: 1px solid #dedede;
+    margin: 0;
+    border-top: none;
+
+    &.hr-form-divider {
+        margin-top: calc(#{$row-margin} - #{$error-height});
+        margin-bottom: $row-margin;
+    }
+}

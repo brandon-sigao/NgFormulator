@@ -18,12 +18,21 @@ export class NgfFormComponent implements OnInit {
   @Input() form: NgfFormGroup;
 
   public rows: IFormRow[];
+  public showHeaderDivider: boolean;
+  public showFirstGroupDivider: boolean;
 
   constructor(private groupService: NgfGroupService) { }
 
   ngOnInit() {
     const controls = this.form.getControlsAsArray();
+    if (controls.length > 0) {
+      this.configureHeader(controls[0]);
+    }
     this.rows = this.groupService.buildRowList(controls);
-    console.log(this.rows);
+  }
+
+  private configureHeader(control: NgfControlType): void {
+    const firstControlIsGroup = (control.type === 'group');
+    this.showHeaderDivider = !firstControlIsGroup;
   }
 }

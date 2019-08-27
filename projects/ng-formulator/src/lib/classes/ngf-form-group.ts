@@ -6,7 +6,8 @@ export class NgfFormGroup extends FormGroup implements IFormItem {
     public label: string;
     public id: string;
     public size: 12;
-
+    public description: string;
+    public displayHeader: boolean;
     readonly type: 'group';
     readonly rows: number;
 
@@ -15,10 +16,12 @@ export class NgfFormGroup extends FormGroup implements IFormItem {
         this.type = 'group';
         this.rows = null;
         this.size = 12;
+        this.displayHeader = true;
     }
 
     public getControlsAsArray(): NgfControlType[] {
         return Object.keys(this.controls)
             .map(key => this.controls[key] as NgfControlType);
     }
+
 }

@@ -10,6 +10,7 @@ import { NgfControlLabelComponent } from './components/ngf-control-label/ngf-con
 import { NgfValidationErrorComponent } from './components/ngf-validation-error/ngf-validation-error.component';
 import { NgfTextareaControlComponent } from './components/ngf-textarea-control/ngf-textarea-control.component';
 import { NgfNumberControlComponent } from './components/ngf-number-control/ngf-number-control.component';
+import { NgfFormGroupComponent } from './components/ngf-form-group/ngf-form-group.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NgfNumberControlComponent } from './components/ngf-number-control/ngf-n
     NgfControlLabelComponent,
     NgfValidationErrorComponent,
     NgfTextareaControlComponent,
-    NgfNumberControlComponent
+    NgfNumberControlComponent,
+    NgfFormGroupComponent
   ],
   imports: [
     CommonModule,

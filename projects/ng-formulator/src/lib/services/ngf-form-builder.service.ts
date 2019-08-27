@@ -1,7 +1,6 @@
 import { NgfGroupConfig } from '../interfaces/group-config/ngf-group-config';
 import { NgfControlConfigType } from './../types/ngf-control-config-type';
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
 import { NgfFormGroup } from '../classes';
 import { NgfControlType } from '../types';
 import { NgfValidator } from '../classes/ngf-validator';
@@ -32,6 +31,7 @@ export class NgfFormBuilderService {
         if (valid) {
             group.id = groupConfig.id;
             group.label = groupConfig.label;
+            group.description = groupConfig.description;
             this.generateControls(groupConfig.controls, group.id)
                 .forEach(val => group.addControl(val.prop, val.control));
         }

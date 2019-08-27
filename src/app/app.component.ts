@@ -11,6 +11,7 @@ export class AppComponent {
   public form: NgfFormGroup;
   constructor(private ngfFormBuilderService: NgfFormBuilderService) {
     this.form = this.ngfFormBuilderService.build(FORM_DEF);
+    // this.form.displayHeader = false;
     console.log(this.form);
   }
 }
