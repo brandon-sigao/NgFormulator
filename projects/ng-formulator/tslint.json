@@ -12,6 +12,11 @@
       "element",
       "ngf",
       "kebab-case"
-    ]
+    ],
+    "variable-name": {
+      "options": [
+        "allow-leading-underscore"
+      ]
+    }
   }
 }

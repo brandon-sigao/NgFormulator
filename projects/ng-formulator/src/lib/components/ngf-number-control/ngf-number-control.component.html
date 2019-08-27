@@ -1,0 +1,13 @@
+<ngf-control-label 
+[id]="service.id" 
+[label]="service.label" 
+[required]="service.required" 
+[color]="service.fieldColor"
+[fieldHasValue]="fieldHasValue"></ngf-control-label>
+
+<input class="text-input input-sizer-1"
+ id="{{service.id}}" name="{{service.id}}" 
+ [style.border-bottom]="service.borderBottomStyle" [placeholder]="service.placeholder"
+[formControl]="service.control" (focus)="service.onFocus()" (blur)="service.onBlur()" type="number">
+
+<ngf-validation-error [control]="service.control"></ngf-validation-error>

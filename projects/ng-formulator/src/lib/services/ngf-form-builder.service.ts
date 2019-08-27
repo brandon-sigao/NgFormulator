@@ -1,85 +1,82 @@
-import { NgfTextAreaControl } from './../classes/ngf-textarea-control';
-import { AbstractControl, Validators } from '@angular/forms';
+import { NgfGroupConfig } from '../interfaces/group-config/ngf-group-config';
+import { NgfControlConfigType } from './../types/ngf-control-config-type';
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
-import { NgfGroupConfig } from '../interfaces/group-interfaces/ngf-group-config';
-import { NgfBaseControlConfig } from '../interfaces/control-interfaces/ngf-base-control-config';
-import { NgfTextControl, NgfFormGroup, NgfRadioControl, NgfMultiSelectControl } from '../classes';
+import { NgfFormGroup } from '../classes';
 import { NgfControlType } from '../types';
-import { NgfTextControlConfig, NgfValidatorsConfig, NgfTextAreaControlConfig } from '../interfaces';
 import { NgfValidator } from '../classes/ngf-validator';
-import { NgfRadioControlConfig } from '../interfaces/control-interfaces/ngf-radio-control-config';
 import { checkObject } from '../util/check-object.util';
-import { NgfMultiSelectControlConfig } from '../interfaces/control-interfaces/ngf-multi-select-control-config';
+import { Guid } from 'guid-typescript';
+import { NgfControlFactoryService } from './ngf-control-factory.service';
+import { NgfValidatorFactoryService } from './ngf-validator-factory.service';
+import { NgfLoggerService } from './ngf-logger.service';
 
 @Injectable()
 export class NgfFormBuilderService {
 
-    constructor() { }
+    constructor(
+        private ngfControlFactoryService: NgfControlFactoryService,
+        private ngfValidatorFactoryService: NgfValidatorFactoryService,
+        private ngfLoggerService: NgfLoggerService) { }
 
-    public group(group: NgfGroupConfig): NgfFormGroup {
-        const controls = (group.controls) ? this.buildControls(group.controls) : {};
-        if (group.groups) {
-            this.addGroupsToControls(group.groups, controls);
+    public build(groupConfig: NgfGroupConfig): NgfFormGroup {
+
+        // Create ID if none provided
+        groupConfig.id = groupConfig.id || Guid.create().toString();
+
+        // Validate that group has label and controls
+        const valid = this.validateConfig(groupConfig);
+
+        const group = new NgfFormGroup();
+
+        if (valid) {
+            group.id = groupConfig.id;
+            group.label = groupConfig.label;
+            group.description = groupConfig.description;
+            this.generateControls(groupConfig.controls, group.id)
+                .forEach(val => group.addControl(val.prop, val.control));
         }
-        return new NgfFormGroup(controls);
+
+        return group;
     }
 
-    private addGroupsToControls(
-        groups: { [key: string]: NgfGroupConfig },
-        controls: { [key: string]: AbstractControl }): void {
-        Object.keys(groups).forEach(key => {
-            controls[key] = this.group(groups[key]);
-        });
-    }
 
-    private buildControl(controlConfig: NgfBaseControlConfig): NgfControlType {
-        const validators: NgfValidator[] = this.buildValidators(controlConfig.validators || {});
-        switch (controlConfig.type) {
-            case 'text':
-                return new NgfTextControl(controlConfig as NgfTextControlConfig, validators);
-            case 'textarea':
-                return new NgfTextAreaControl(controlConfig as NgfTextAreaControlConfig, validators);
-            case 'radio':
-                checkObject(controlConfig, 'options', `Config option for radio control has no options`);
-                return new NgfRadioControl(controlConfig as NgfRadioControlConfig, validators);
-            case 'multi':
-                checkObject(controlConfig, 'options', `Config option for multi-select control has no options`);
-                return new NgfMultiSelectControl(controlConfig as NgfMultiSelectControlConfig);
+    private validateConfig(config: NgfGroupConfig): boolean {
+        if (!config.label || config.label.length === 0) {
+            this.ngfLoggerService.warn(`Label for group is missing!`, config.label, config.id);
         }
-    }
-    private buildControls(controls: { [key: string]: NgfBaseControlConfig }): { [key: string]: NgfControlType } {
-        const mappedControls = {};
-        Object.keys(controls).forEach(key => {
-            mappedControls[key] = this.buildControl(controls[key]);
-        });
-
-        return mappedControls;
+        if (!config.controls || Object.keys(config.controls).length === 0) {
+            this.ngfLoggerService.error(`No controls found for group cannot create group.`, config.label, config.id);
+            return false;
+        }
+        return true;
     }
 
+    private generateControls(
+        controls: { [key: string]: NgfControlConfigType },
+        groupId: string): { prop: string, control: NgfControlType }[] {
+        return Object.keys(controls)
+            .map((prop: string) => {
+                const controlConfig: NgfControlConfigType = controls[prop];
+                const control = this.parseControl(controlConfig, groupId);
+                return { prop, control };
+            })
+            .filter(val => val.control !== null);
+    }
 
-    private buildValidators(validatorGroup: NgfValidatorsConfig): NgfValidator[] {
-        return Object.keys(validatorGroup)
-            .map(key => {
-                const message = validatorGroup[key].customMessage || null;
-                const definition = validatorGroup[key];
-                switch (key) {
-                    case 'required':
-                        return new NgfValidator(key, Validators.required, message);
-                    case 'max':
-                        return new NgfValidator(key, Validators.max(definition.amount), message);
-                    case 'min':
-                        return new NgfValidator(key, Validators.min(definition.amount), message);
-                    case 'maxLength':
-                        return new NgfValidator(key, Validators.maxLength(definition.amount), message);
-                    case 'minLength':
-                        return new NgfValidator(key, Validators.minLength(definition.amount), message);
-                    case 'minLength':
-                        return new NgfValidator(key, Validators.pattern(RegExp(definition.pattern)), message);
-                    case 'requiredTrue':
-                        return new NgfValidator(key, Validators.pattern, message);
-                }
-            });
+    private parseControl(config: NgfControlConfigType, groupId: string): NgfControlType {
+        const validators: NgfValidator[] = this.ngfValidatorFactoryService.build(config.validators || {});
+        try {
+            checkObject(config, 'type', 'Control object does not have a type!');
+            if (config.type === 'group') {
+                checkObject(config, 'controls', 'No controls found on group config object!');
 
+                return this.build(config);
+            } else {
+                return this.ngfControlFactoryService.build(config, validators);
+            }
+        } catch (e) {
+            this.ngfLoggerService.error('Could not generate control object!', config.label, groupId);
+            return null;
+        }
     }
 }

@@ -5,5 +5,5 @@ export type NgfControlTypeText =
     | 'multi'
     | 'datetime' // TODO
     | 'number' // TODO
-    | 'boolean' // TODO
+    | 'boolean'
     | 'group';

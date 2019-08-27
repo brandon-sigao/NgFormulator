@@ -1,7 +1,6 @@
-import { NgFormulatorModule } from './../../projects/ng-formulator/src/lib/ng-formulator.module';
+import { NgFormulatorModule } from 'ng-formulator';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -10,7 +9,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    NgFormulatorModule
+    NgFormulatorModule.forRoot({
+      activeColor: '#45B8C5',
+      inactiveColor: '#626A6F',
+      errorColor: '#FF6057'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

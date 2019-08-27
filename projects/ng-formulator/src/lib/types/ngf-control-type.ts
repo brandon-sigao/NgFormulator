@@ -1,7 +1,8 @@
-import { NgfRadioControl, NgfTextAreaControl, NgfTextControl, NgfMultiSelectControl } from '../classes';
+import { NgfRadioControl, NgfTextAreaControl, NgfTextControl, NgfMultiSelectControl, NgfFormGroup } from '../classes';
 
 export type NgfControlType =
     NgfRadioControl |
     NgfTextAreaControl |
     NgfTextControl |
-    NgfMultiSelectControl;
+    NgfMultiSelectControl |
+    NgfFormGroup;

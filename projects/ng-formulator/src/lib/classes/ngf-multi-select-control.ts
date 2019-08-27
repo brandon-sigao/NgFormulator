@@ -1,34 +1,59 @@
-import { FormControl, FormArray } from '@angular/forms';
-import { NgfBaseControl } from './ngf-base-control';
-import { NgfMultiSelectControlConfig } from '../interfaces/control-interfaces/ngf-multi-select-control-config';
-import { NgfValidator } from './ngf-validator';
-import { NgfBaseArrayControl } from './ngf-base-array-control';
-import { forkJoin, Subscription, Observable, merge } from 'rxjs';
+import { FormArray } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { NgfBooleanControl } from './ngf-boolean-control';
+import { NgfControlTypeText, NgfValidatorTypeString, NgfSize } from '../types';
+import { IValidated, IFormItem } from '../interfaces';
 
-export class NgfMultiSelectControl extends NgfBaseArrayControl {
+export class NgfMultiSelectControl extends FormArray implements IFormItem, IValidated {
 
-    // https://stackoverflow.com/questions/40927167/angular-reactiveforms-producing-an-array-of-checkbox-values
-    public options: { [key: string]: string } | { [key: number]: string };
-    public valuesObservable: Observable<any>;
+    public id: string;
+    public label: string;
+    public size: NgfSize;
+    public required: boolean;
+    public type: NgfControlTypeText;
+    public rows: number;
+
     public valuesSubscription: Subscription;
+    public validatorStrings: NgfValidatorTypeString[];
 
-    constructor(config: NgfMultiSelectControlConfig) {
+    constructor(controls: NgfBooleanControl[], required: boolean) {
+        super(controls);
 
-        const controls = Object.keys(config.options).map(k => new FormControl(false));
-        super(controls, config);
-        this.valuesObservable = merge(this.controls.map(control => control.valueChanges));
-        // TODO: probably need to move this into the base
-        this.valuesSubscription = this.valuesObservable.subscribe((values) => {
-            if (this.required && !this.hasSelected()) {
-                this.setInvalid();
-            } else {
-                this.setValid();
-            }
+        this.type = 'multi';
+        this.required = required;
+
+        // For now, just force the validator strings because there's only 1 type of validation
+        // for this type of control
+        this.validatorStrings = (this.required) ? ['required'] : [];
+
+        this.setValidState();
+        this.valueChanges.subscribe((values) => {
+            this.setValidState();
         });
-        this.options = config.options;
     }
 
+    // TODO: test this.  May not work
+    public get displayError(): boolean {
+        return this.invalid && (this.dirty || this.touched);
+    }
+    public hasValidator(validatorString: NgfValidatorTypeString): boolean {
+        return this.validatorStrings.indexOf(validatorString) > -1;
+    }
 
+    public getControlsAsArray(): NgfBooleanControl[] {
+        return this.controls as NgfBooleanControl[];
+    }
+    public hasSelected(): boolean {
+        return this.controls.some(control => control.value === true);
+    }
+
+    private setValidState(): void {
+        if (this.required && !this.hasSelected()) {
+            this.setInvalid();
+        } else {
+            this.setValid();
+        }
+    }
     private setInvalid(): void {
         this.setErrors({ required: true });
     }

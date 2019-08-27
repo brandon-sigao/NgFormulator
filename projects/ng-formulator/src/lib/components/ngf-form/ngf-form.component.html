@@ -1,3 +1,23 @@
 <form [formGroup]="form">
-  
+  <div *ngIf="form.displayHeader" class="row" [ngClass]="{'mb-3': showHeaderDivider}">
+    <div class="col-12">
+      <h3 class="my-4">{{form.label}}</h3>
+    </div>
+    <div class="col-12">
+      <hr class="ngf-hr" *ngIf="showHeaderDivider">
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let row of rows">
+    <div *ngFor="let column of row.columns" [class]="column.class">
+      <div *ngFor="let control of column.content">
+        <ngf-text-control *ngIf="control.type === 'text'" [control]="control"></ngf-text-control>
+        <ngf-textarea-control *ngIf="control.type === 'textarea'" [control]="control"></ngf-textarea-control>
+        <ngf-number-control *ngIf="control.type === 'number'" [control]="control"></ngf-number-control>
+
+        <hr *ngIf="control.type === 'group'" class="ngf-hr hr-form-divider">
+        <ngf-form-group *ngIf="control.type === 'group'" [control]="control"></ngf-form-group>
+      </div>
+    </div>
+  </div>
 </form>

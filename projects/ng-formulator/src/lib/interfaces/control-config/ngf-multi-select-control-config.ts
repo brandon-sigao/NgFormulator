@@ -1,5 +1,6 @@
 import { NgfBaseControlConfig } from './ngf-base-control-config';
+import { NgfBooleanControlConfig } from './ngf-boolean-control-config';
 export interface NgfMultiSelectControlConfig extends NgfBaseControlConfig {
-    options: { [key: string]: string } | { [key: number]: string };
-    initialValue: string[] | number[];
+    options: NgfBooleanControlConfig[];
+    type: 'multi';
 }

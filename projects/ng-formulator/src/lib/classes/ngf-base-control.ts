@@ -1,29 +1,24 @@
-import { NgfBaseControlConfig } from './../interfaces/control-interfaces/ngf-base-control-config';
-import { FormControl } from '@angular/forms';
-import { NgfValidatorTypeString } from '../types';
-import { NgfValidator } from './ngf-validator';
+import { FormControl, ValidatorFn } from '@angular/forms';
+import { NgfValidatorTypeString, NgfControlTypeText, NgfSize } from '../types';
+import { IFormItem, IValidated } from '../interfaces';
 
-export class NgfBaseControl extends FormControl {
+export class NgfBaseControl extends FormControl implements IFormItem, IValidated {
+    public id: string;
     public label: string;
-    public size: number;
+    public size: NgfSize;
+    public type: NgfControlTypeText;
     public validatorStrings: NgfValidatorTypeString[];
+    public rows: number;
 
-    constructor(initalValue: any, config: NgfBaseControlConfig, validators?: NgfValidator[]) {
-        let ngValidators;
-        let typeList;
-        if (validators) {
-            ngValidators = validators.map(v => v.validatorFunction);
-            typeList = validators.map(v => v.type);
-        }
-
-        super(initalValue, ngValidators);
-
-        this.label = config.label;
-        this.size = config.size || 12;
-        this.validatorStrings = typeList || null;
+    constructor(initalValue: any, validators?: ValidatorFn[]) {
+        super(initalValue, validators);
+        this.rows = 1;
     }
 
     public hasValidator(validatorString: NgfValidatorTypeString): boolean {
         return this.validatorStrings.indexOf(validatorString) > -1;
+    }
+    public get displayError(): boolean {
+        return this.invalid && (this.dirty || this.touched);
     }
 }

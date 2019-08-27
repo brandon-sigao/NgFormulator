@@ -1,6 +1,5 @@
-import { NgfFormBuilderService } from './../../projects/ng-formulator/src/lib/services/ngf-form-builder.service';
+import { NgfFormBuilderService, NgfFormGroup } from 'ng-formulator';
 import { Component } from '@angular/core';
-import { NgfFormGroup } from 'projects/ng-formulator/src/lib/classes';
 import { FORM_DEF } from 'src/const/form';
 
 @Component({
@@ -10,8 +9,9 @@ import { FORM_DEF } from 'src/const/form';
 })
 export class AppComponent {
   public form: NgfFormGroup;
-  constructor(private ngfBuilder: NgfFormBuilderService) {
-    this.form = this.ngfBuilder.group(FORM_DEF);
+  constructor(private ngfFormBuilderService: NgfFormBuilderService) {
+    this.form = this.ngfFormBuilderService.build(FORM_DEF);
+    // this.form.displayHeader = false;
+    console.log(this.form);
   }
-  title = 'FormulatorLibrary';
 }

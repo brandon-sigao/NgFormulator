@@ -1,0 +1,45 @@
+@import './variables.scss';
+
+.label-sizer {
+    height: $label-height !important;
+}
+
+.input-sizer-1 {
+    height: $input-height !important;
+}
+
+.input-sizer-2 {
+    height: calc((#{$row-height} * 2) - #{$label-height} - #{$error-height});
+}
+
+.input-sizer-3 {
+    height: calc((#{$row-height} * 3) - #{$label-height} - #{$error-height});
+}
+
+.error-sizer {
+    height: $error-height !important;
+    margin-bottom: $input-bottom-margin !important;
+}
+
+.text-input {
+    width: 100%;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    background-color: transparent;
+
+    &:focus {
+        outline: 0 !important;
+    }
+}
+
+.ngf-hr {
+    border-bottom: 1px solid #dedede;
+    margin: 0;
+    border-top: none;
+
+    &.hr-form-divider {
+        margin-top: calc(#{$row-margin} - #{$error-height});
+        margin-bottom: $row-margin;
+    }
+}

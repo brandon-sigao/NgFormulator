@@ -1,26 +1,27 @@
-import { FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { NgfControlType } from '../types';
-import { Guid } from 'guid-typescript';
+import { IFormItem } from '../interfaces';
 
-export class NgfFormGroup extends FormGroup {
+export class NgfFormGroup extends FormGroup implements IFormItem {
     public label: string;
     public id: string;
+    public size: 12;
+    public description: string;
+    public displayHeader: boolean;
+    readonly type: 'group';
+    readonly rows: number;
 
-    constructor(
-        controls: { [key: string]: NgfControlType | NgfFormGroup },
-        validatorOrOpts?: ValidatorFn[]) {
-        super(controls, validatorOrOpts);
-        this.id = Guid.create().toString();
+    constructor() {
+        super({}, null);
+        this.type = 'group';
+        this.rows = null;
+        this.size = 12;
+        this.displayHeader = true;
     }
 
-    public getControlsList(): NgfControlType[] {
+    public getControlsAsArray(): NgfControlType[] {
         return Object.keys(this.controls)
-            .filter(key => !(this.controls[key] instanceof FormGroup))
             .map(key => this.controls[key] as NgfControlType);
     }
-    public getGroupsList(): NgfFormGroup[] {
-        return Object.keys(this.controls)
-            .filter(key => this.controls[key] instanceof FormGroup)
-            .map(key => this.controls[key] as NgfFormGroup);
-    }
+
 }

@@ -1,9 +1,9 @@
-import { NgfTextControlConfig } from '../interfaces/control-interfaces/ngf-text-control-config';
 import { NgfBaseControl } from './ngf-base-control';
-import { NgfValidator } from './ngf-validator';
+import { ValidatorFn } from '@angular/forms';
 
 export class NgfTextControl extends NgfBaseControl {
-    constructor(config: NgfTextControlConfig, validators?: NgfValidator[]) {
-        super(config.initialValue || '', config, validators);
+    constructor(initialValue: string, validators?: ValidatorFn[]) {
+        super(initialValue, validators);
+        this.type = 'text';
     }
 }
